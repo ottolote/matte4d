@@ -1,0 +1,11 @@
+# top level pdfs
+*.pdf
+
+# latex temporary files
+**.log
+**.aux
+**.dvi
+
+# vim swapfiles
+**.swp
+**.swo

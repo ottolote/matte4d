@@ -1,0 +1,77 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+% mathermatics
+\usepackage{amssymb} % useful math symbols
+\usepackage{amsmath} % more useful math
+
+% graphics
+\usepackage{graphicx}
+\usepackage{float}    % for more accurate graphics placement
+\usepackage{fancyhdr} % for top header
+
+% formatting
+\usepackage{enumitem} % provides easy change of labels in enumerate environment
+\usepackage[top=3cm, bottom=4cm, width=17cm]{geometry} % for smaller page margins
+
+% colors
+\usepackage{xcolor}
+
+%% coding
+% 
+% uncomment this after you have completed the required installation
+% see https://github.com/gpoore/minted for info
+%
+%\usepackage{minted} 
+%\definecolor{codeBgColor}{RGB}{240,240,240}
+%
+
+
+
+% very simple alias, \ex{} becomes the same as \subsubsection*{}
+% TIP: remove the * in the line below if you want it numbered
+\newcommand{\ex}[1]{\subsubsection*{#1}}
+
+
+
+
+%Begining of the document
+\begin{document}
+
+\pagestyle{fancy} % use pagestyle with simple header (from fancyhdr)
+
+%\pagenumbering{gobble} % uncomment to remove pagenumbering (in case of single page document)
+\fancyhead[L]{Course name + code}
+\fancyhead[C]{\textbf{Assignment title}}
+\fancyhead[R]{Author name ( + student ID )}
+
+
+\ex{Exercise \#}
+
+\begin{enumerate}[label=\alph*)]
+    \item{
+    }
+
+    \item{
+    }
+\end{enumerate}
+
+
+\ex{Exercise \#}
+
+\begin{enumerate}[label=\alph*)]
+    \item{
+    }
+
+    \item{
+    }
+\end{enumerate}
+
+
+%% uncomment this if you need references. Edit the .bbl file with your references
+%% and use "\cite{bibitem-label}" to cite
+%\bibliography{template}
+
+\end{document}
+
