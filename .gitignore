@@ -5,6 +5,7 @@
 **.log
 **.aux
 **.dvi
+**.out
 
 # vim swapfiles
 **.swp

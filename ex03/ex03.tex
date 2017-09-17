@@ -3,8 +3,14 @@
 \usepackage[utf8]{inputenc}
 
 % mathermatics
-\usepackage{amssymb} % useful math symbols
+%\usepackage[fleqn]{mathtools}
 \usepackage{amsmath} % more useful math
+\usepackage{amssymb} % useful math symbols
+
+\usepackage{hyperref} % hyperlinks - needed by cleveref
+\usepackage{cleveref} % clever references - needed by autonum
+\usepackage{autonum}  % only add numbers to equations that are referenced
+
 
 % graphics
 \usepackage{graphicx}
@@ -42,31 +48,196 @@
 \pagestyle{fancy} % use pagestyle with simple header (from fancyhdr)
 
 %\pagenumbering{gobble} % uncomment to remove pagenumbering (in case of single page document)
-\fancyhead[L]{Course name + code}
-\fancyhead[C]{\textbf{Assignment title}}
-\fancyhead[R]{Author name ( + student ID )}
+\fancyhead[L]{TMA4135 Matematikk 4D}
+\fancyhead[C]{\textbf{Exercise 3}}
+\fancyhead[R]{Otto Lote (748704)}
 
 
-\ex{Exercise \#}
+\ex{1)}
+
+\begin{align}
+    \intertext{We have the one-dimensional wave equation}
+    \frac{\partial^2 u(x,t)}{\partial t^2} &= 
+        c^2 \frac{\partial^2 u(x,t)}{\partial x^2} \label{1waveeq}\\
+    \intertext{with boundary conditions:}
+    \frac{\partial u(0,t)}{\partial x} = 0 \quad &\text{and} \quad
+        \frac{\partial u(L,t)}{\partial x} = 0 \label{1-boundary}
+    \intertext{where \(c \approx 340\)m/s} 
+\end{align}
 
 \begin{enumerate}[label=\alph*)]
-    \item{
+    \item{ 
+        \begin{align}
+            \intertext{Differentiating \(u(x,t) = F(x)G(t)\) with respects to
+                \(x\) and \(t\) we get} 
+            \frac{\partial^2 u}{\partial t^2} = F\ddot G \quad &\text{and} \quad
+                \frac{\partial^2 u}{\partial x^2} = F''G   \\
+            \intertext{By inserting this into (\ref{1waveeq}) we get}
+            F\ddot G &= c^2 F''G \label{1a-waveeq-FG} \\
+            \intertext{and the boundary conditions}
+            F'(0)G(t) = 0 \quad &\text{and} \quad F'(L)G(t) = 0 \label{1a-boundary-FG} \\
+            \intertext{Simplifying (\ref{1a-waveeq-FG}) we get}
+            \frac{\ddot G}{c^2G} &= \frac{F''}{F}   \\
+            \intertext{We now have an equation where the left side depend on
+                \(t\) and the right side depend on \(x\). Since a change in \(x\) or \(t\)
+                would be independent of the other side both sides must be constant:}
+            \frac{\ddot G}{c^2G} &= \frac{F''}{F} = k \label{1a-separated}   \\
+            \intertext{This means we can split the equations into two ODEs}
+            F'' -kF = 0 \label{1a-Fdef} \\
+            \intertext{and}
+            \ddot G - c^2kG = 0 \label{1a-Gdef} \\
+            \intertext{We're looking for a non-trivial solution to the wave
+                equation. We can see from (\ref{1a-waveeq-FG}) that if \(F = 0\) or
+                \(G = 0\) all solutions become trivial. We can therefore set \(F
+                \neq 0\) and \(G \neq 0\) since that is all we're interested in.}
+            \intertext{For positive \(k = \mu^2\) we have the general solution}
+            F = A_1e^{\mu x} &+ B_1e^{-\mu x}   \\
+            \intertext{and its derivative}
+            F' = A'_1e^{\mu x} &+ B'_1e^{-\mu x} \label{1a-F-derivative} \\
+            \intertext{Inserting the boundary conditions (\ref{1a-boundary-FG}) in (\ref{1a-F-derivative}) we get}
+            F'(L)G(t) &= (A'_1e^{\mu L} + B'_1e^{-\mu L})G(t) = 0   \\
+            \intertext{\(G(t) \neq 0\) gives} 
+            \mu L A''_1 + \mu L B''_1  &= 0 \implies A''_1 = B''_1 = 0   \\
+            \intertext{meaning positive \(k\) only gives the trivial solution
+                \( F(x)G(t) = 0\)}
+            \intertext{We choose negative \(k = -p^2\) which gives us the
+                general solution}
+            F(x) = A' \cos px + B' \sin px   \\
+            \intertext{and its derivative}
+            F'(x) = A \sin px + B \cos px \label{1a-generalsolution-derivative} \\
+            \intertext{Inserting the boundary conditions (\ref{1a-boundary-FG})
+                into (\ref{1a-generalsolution-derivative}) gives us}
+            F'(0)G(t) &= \big(A \sin 0 + B \cos 0\big)G(t) = BG(t) = 0 \\
+            \intertext{Since \(G(t) \neq 0\) we know that \(B = 0\)} 
+            \intertext{To avoid trivial solutions we set \(A \neq 0\)}
+            F'(L)G(t) &= A \sin(pL)G(t) = 0 \\
+            \intertext{We now have infinitely many solutions \(F(x) = F_n(x)\) where}
+            F_n(x) &= A \sin{\frac{n\pi}{L}} \quad\text{where}\quad n \in \mathbb{Z}^+
+            \intertext{We can now solve (\ref{1a-Gdef}) with \(k = -p^2 =
+                -(\frac{n\pi}{L})\)}
+            \ddot G + c^2p^2G = 0  \\
+            \ddot G_n + \big(\underbrace{\frac{cn\pi}{L}}_{\lambda_n} \big)^2 G = 0  \\
+            G_n(t) &= G'(0) \cos \lambda_nt + G(0) \sin \lambda_nt \\
+            \intertext{Which gives us}
+            u(x,t) &= F(x)G(t) = F_n(x)G_n(t) = A \sin{\frac{n\pi}{L}}G'(0) \cos \lambda_nt + G(0) \sin \lambda_nt \\
+        \end{align}
     }
 
     \item{
+            \begin{align}
+                \intertext{The spectrum is the set of \(\lambda_n\)}
+                \lambda_n = \frac{cn\pi}{L} \quad\text{where}\quad n \in \mathbb{N}
+            \end{align}
+    }
+    \item{
+            \begin{align}
+                f_n &= \frac{cn}{2L} \\
+                \intertext{Fundamental mode is when n = 1}
+                f &= \frac{c}{2L} = \frac{340[\mathrm{m/s}]}{2\times0.5[\mathrm{m}]} \\
+                &= 340 \, [\mathrm{1/s}] = 340\mathrm{Hz} 
+            \end{align}
     }
 \end{enumerate}
 
 
-\ex{Exercise \#}
+\ex{2)}
+
+\begin{align}
+    \intertext{We have the one-dimensional wave equation}
+    \frac{\partial^2 u(x,t)}{\partial t^2} &= 
+        \frac{\partial^2 u(x,t)}{\partial x^2} \label{2waveeq}\\
+    \intertext{with boundary conditions:}
+    u(0,t) &== 0 \quad &\text{and} \quad u(3,t) = 0 \\
+    \intertext{We set \(u(x,t) = F(x)G(t)\) and see that
+        (\ref{2waveeq}) can be written as }
+    F\ddot G &= F''G \\
+    \intertext{with boundary conditions (\(G \neq 0\) since we're interested in
+        non-trivial solutions)}
+    F(0) = 0 \quad\text{and}\quad F(3) = 0 
+    \intertext{and separated (constant since they depend on
+        different variables)}
+    \frac{F''}{F} = \frac{\ddot G}{G} &= k\\
+    F'' -kF &= 0 \\
+    \ddot G -kG &= 0
+    \intertext{We can now solve the two ODEs. Setting positive \(k = \mu^2\)
+        gives us trivial solutions, so we set negative \(k = -p^2\)}
+    F(x) &= F'(0) \sin px \\
+    \intertext{set boundary conditions}
+    F(3) &= F'(0) \sin(3p) = 0 \\
+    p &= \frac{n\pi}{3} \\
+    \intertext{Using \(p = \frac{n\pi}{3}\) we can solve for \(G(t)\)}
+    G(t) = G(0)\cos \frac{n\pi}{3}t + G'(0) \sin \frac{n\pi}{3}t \\
+    \intertext{which gives us}
+    u(x,t) &= \underbrace{F'(0) \sin \frac{n\pi}{3}x}_{F(x)} \underbrace{( G(0)
+        \cos \frac{n\pi}{3}t + G'(0) \sin \frac{n\pi}{3}t)}_{G(t)}
+\end{align}
 
 \begin{enumerate}[label=\alph*)]
     \item{
+            \begin{align}
+                \intertext{We have the initial conditions}
+                F(x)G(0) &= x(3-x) \quad\text{and}\quad G'(0) = 0
+                    \label{eq:2-a-initial} \\
+                u(x,t) &= x(3-x) \cos \frac{n\pi}{3}t             
+            \end{align}
     }
 
     \item{
+            \begin{align}
+                \intertext{We have the initial conditions}
+                G(0) &= 0 \quad\text{and}\quad F(x)G'(0) = \sin(\pi x)
+                    -\frac{1}{2}\sin(2\pi x) \\ 
+                u(x,t) &= \underbrace{F'(0) \sin \frac{n\pi}{3}x}_{F(x)} (G(0)
+                    \cos \frac{n\pi}{3}t  \\
+                &= \underbrace{F'(0) \sin \frac{n\pi}{3}x
+                    G'(0)}_{F(x)G'(0)} \sin \frac{n\pi}{3}t) \\
+                &=  (\sin(\pi x) -\frac{1}{2}\sin(2\pi x))\sin \frac{n\pi}{3}t)
+            \end{align}
+    }
+
+    \item{
+            \begin{align}
+                \intertext{We have the initial conditions}
+                F(x)G(0) &= x(3-x) \quad\text{and}\quad 
+                    F(x)G'(0) = \sin(\pi x) - \frac{1}{2} \sin(2\pi x) \\
+                u(x,t) &= \underbrace{F'(0) \sin \frac{n\pi}{3}x}_{F(x)}
+                    \underbrace{( G(0) \cos \frac{n\pi}{3}t + G'(0) \sin
+                    \frac{n\pi}{3}t)}_{G(t)} \\
+                &= \underbrace{F'(0) \sin \frac{n\pi}{3}x 
+                    G(0)}_{F(x)G(0)}\cos \frac{n\pi}{3}t + \underbrace{F'(0) \sin
+                    \frac{n\pi}{3}xG'(0)}_{F(x)G'(0)} \sin \frac{n\pi}{3}t  \\
+                &= x(3-x)\cos \frac{n\pi}{3}t + \big(\sin(\pi x)
+                    -\frac{1}{2}\sin(2\pi x)\big) \sin \frac{n\pi}{3}t
+            \end{align}
     }
 \end{enumerate}
+
+\ex{3)}
+
+\begin{align}
+    \frac{\partial u}{\partial t} = \frac{\partial^2u}{\partial x^2} \label{eq:3-1} \\
+    \intertext{with boundary conditions}
+    u(0,t) = 0 \quad\text{and}\quad u(2,t) = 0 \\
+    \intertext{We separate the variables by defining functions \(F(x)\) and \(G(t)\)}
+    u(x,t) = F(x)G(t)
+    \intertext{We have that}
+    \dot GF = \frac{\partial u}{\partial t} \quad\text{and}\quad
+        GF'' = \frac{\partial^2u}{\partial x^2} \label{test} \\
+    \intertext{We insert (\ref{test}) into (\ref{eq:3-1}) and get}
+    \dot GF = F''G  \\
+    \frac{\dot G}{G} = \frac{F''}{F} \\
+    \intertext{Since these are separated they must be constant}
+    \frac{\dot G}{G} = \frac{F''}{F} = k \\
+    \intertext{Splitting these into two ODEs gives}
+    \dot G - kG = 0  \\
+    \intertext{and}
+    F'' -kF = 0
+    \intertext{Like in 1a) we're not interested in trivial solutions where
+        \(F(x)G(t) = 0\) so we set \(F \neq 0\) and \(G \neq 0\)}
+    \intertext{Solving for G(t) gives}
+    G(t) = Ae^{kt} \\
+    \intertext{and for  F(x) gives}
+\end{align}
 
 
 %% uncomment this if you need references. Edit the .bbl file with your references
