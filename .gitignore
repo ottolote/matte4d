@@ -1,5 +1,5 @@
 # top level pdfs
-*.pdf
+/*.pdf
 
 # latex logfiles or temporary files
 **.log
