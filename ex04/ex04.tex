@@ -57,24 +57,55 @@
 
 \begin{align}
     \intertext{We have the heat equation}
-    \frac{\partial u}{\partial t} = c^2 \frac{\partial^2 u}{\partial x^2}
+    \frac{\partial u}{\partial t} &= c^2 \frac{\partial^2 u}{\partial x^2}
         \label{eq:1-def} \\
     \intertext{with initial condition}
-    u(x,0) = 200 \sin(\pi x) \label{eq:1-init} \\
+    u(x,0) &= 200 \sin(\pi x) \label{eq:1-init} \\
     \intertext{The ends of the rod is kept at 0\degree C which means}
-    u(0,t) = 0 \quad\text{and}\quad u(L,t) = 0 \\
+    u(0,t) &= 0 \quad\text{and}\quad u(L,t) = 0 \label{eq:1-constraints}\\
+    \intertext{By variable separation we set}
+    u(x,t) &= F(x)G(t) \label{eq:1-separated}\\
+    \intertext{and}
+    F(0) &= 0 \label{eq:1-F-constraints}\\ 
+    F(L) &= 0 \label{eq:1-G-constraints}\\
+    \intertext{which when inserted into (\ref{eq:1-def})gives us}
+    F\dot G &= c^2 F''G \\
+    \frac{F}{F''} &= c^2\frac{G}{\dot G} \\
+    \intertext{Since F and G are independent both sides of this equation must
+        be constant}
+    \frac{F}{F''} &= c^2\frac{G}{\dot G} = k \\
+    \intertext{and can be split into two ODEs}
+    F -kF'' &= 0 \label{eq:1-F-ODE}\\
+    c^2G - k\dot G &= 0 \label{eq:1-G-ODE}\\
+    \intertext{To solve (\ref{eq:1-F-ODE}) we first try with positive \(k =
+        -p^2\) which gives us}
+    F(x) &= \frac{F'(0)}{p} \sin px \\
+    \intertext{If we insert (\ref{eq:1-F-constraints}) into this we get}
+    F(L) &= \frac{F'(0)}{p} \sin pL = 0 \\
+    \intertext{giving us}
+    p &= \frac{n\pi}{L} \\
+    \intertext{and a general solution}
+    F(x) &= \frac{F'(0)L}{n\pi}\sin \frac{n\pi}{L}x \\
 \end{align}
 
 
 \ex{2}
-
-\begin{enumerate}[label=\alph*)]
-    \item{
-    }
-
-    \item{
-    }
-\end{enumerate}
+\begin{align} 
+    \intertext{Since we have a steady state there is no change dependent on time, meaning all time derivatives are constant (or zero)}
+    c^2 \frac{\partial^2 u}{\partial x^2} &= k \label{eq:2-def} \\
+    \intertext{We use (\ref{eq:1-separated}) to get}
+    c^2 F''(x)G(t) &= k \\
+    \intertext{We know that G(t) is constant since we are in a steady state,
+        which means}
+    u(x,\infty) &= c^2G(\infty)F''(x) \\
+    F''(x) &= K \\
+    F(x) &= Kx^2 + \alpha x + \beta \\
+    \intertext{We have that}
+    F(0) &= U_1 \\
+    F(L) &= U_2 \\
+    \intertext{which gives us}
+    \beta &= U_1
+\end{align}
 
 
 \ex{3}
