@@ -86,6 +86,24 @@
     p &= \frac{n\pi}{L} \\
     \intertext{and a general solution}
     F(x) &= \frac{F'(0)L}{n\pi}\sin \frac{n\pi}{L}x \\
+    \intertext{We have from (\ref{eq:1-init}) that}
+    F(x)G(0) &= 200 \sin \pi x = \frac{G(0)F'(0)L}{n\pi} \sin \frac{n\pi}{L}x \\
+    \intertext{which gives us}
+    n &= L \\
+    G(0)F'(0) &= 200\pi \\
+    \intertext{Solving (\ref{eq:1-G-ODE}) yields}
+    G(t) &= G(0)e^{\frac{c^2}{k}t} \\
+    \intertext{We know that the system has a steady state, meaning \(\dot G(t)
+        \to 0\) as t increases, which means we have a negative \(k = -p^2\)
+        where \(p = \frac{n\pi}{L} = \pi\)}
+    G(t) &= G(0)e^{-\frac{c^2}{\pi^2}t} \\
+    \intertext{giving us}
+    u(x,t) &= F(x)G(t) = \frac{F'(0)}{\pi} \sin (\pi x) G(0)e^{-\frac{c^2}{\pi^2}t} \\
+    \intertext{For the maximum temperature to decrease by 50\degree C in 20
+        seconds we have that}
+    u(0.5, 0) &= 200 \\
+    u(0.5, 20) &= 150 \\
+    c = \pi \sqrt{ln\frac{200}{150}} &\approx 1.685  \\
 \end{align}
 
 
