@@ -10,3 +10,7 @@
 # vim swapfiles
 **.swp
 **.swo
+
+# incomplete exercises
+ex03/ex03.pdf
+ex04/ex04.pdf
