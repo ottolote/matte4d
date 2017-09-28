@@ -1,0 +1,98 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+% mathermatics
+\usepackage{amssymb} % useful math symbols
+\usepackage{amsmath} % more useful math
+\usepackage{gensymb}
+
+% references and automatic numbering
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{autonum}
+
+% graphics
+\usepackage{graphicx}
+\usepackage{float}    % for more accurate graphics placement
+\usepackage{fancyhdr} % for top header
+
+% formatting
+\usepackage{enumitem} % provides easy change of labels in enumerate environment
+\usepackage[top=3cm, bottom=4cm, width=15cm]{geometry} % for smaller page margins
+
+% colors
+\usepackage{xcolor}
+
+%% coding
+% 
+% uncomment this after you have completed the required installation
+% see https://github.com/gpoore/minted for info
+%
+%\usepackage{minted} 
+%\definecolor{codeBgColor}{RGB}{240,240,240}
+%
+
+
+
+% very simple alias, \ex{} becomes the same as \subsubsection*{}
+% TIP: remove the * in the line below if you want it numbered
+\newcommand{\ex}[1]{\subsubsection*{#1}}
+
+
+
+
+%Begining of the document
+\begin{document}
+
+\pagestyle{fancy} % use pagestyle with simple header (from fancyhdr)
+
+%\pagenumbering{gobble} % uncomment to remove pagenumbering (in case of single page document)
+\fancyhead[L]{TMA4135 Matematikk 4D}
+\fancyhead[C]{\textbf{Exercise 5}}
+\fancyhead[R]{Otto Lote (748704)}
+
+
+The fourier transform is given by
+\[\hat f(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}{f(x)e^{-iwx} dx}
+    \label{ftrans}\]
+
+
+\ex{1}
+\[ f(x) = e^-|x| = 
+    \begin{cases}
+        f(x) = e^-x, &\quad x >= 0 \\
+        f(x) = e^x, &\quad x < 0 
+    \end{cases} \label{eq:1-fdef} \]
+
+\begin{enumerate}[label=\alph*)]
+    \item { 
+        \begin{align}
+            \intertext{Inserting (\ref{eq:1-fdef}) into (\ref{ftrans}) we have that}
+            \hat f(x) &= \frac{1}{\sqrt{2\pi}}\Bigg(\int_{-\infty}^0{e^x
+                e^{-iwx} dx} + \int_0^{\infty}{e^{-x} e^{-iwx} dx}\Bigg) \\
+            \hat f(x) &= \frac{1}{\sqrt{2\pi}}\Bigg(\int_{-\infty}^0{e^{x-iwx}dx} 
+                + \int_0^{\infty}{e^{-iwx-x} dx}\Bigg) \\
+            &= \frac{1}{\sqrt{2\pi}}\Bigg(\Big[{\frac{1}{1-iw}e^{(1-iw)x}\Big]_
+                {-\infty}^{0}} - \Big[{\frac{1}{1+iw}
+                e^{-(1+iw)x}\Big]_{0}^{\infty}}\Bigg) \\
+            &= \frac{1}{\sqrt{2\pi}}\Bigg(\frac{1}{1-iw} + \frac{1}{1+iw}\Bigg) \\
+            &= \frac{1}{\sqrt{2\pi}}\Bigg(\frac{1+iw}{1+w^2} +
+                \frac{1-iw}{1+w^2}\Bigg) = \frac{1}{\sqrt{2\pi}(1 + w^2)}\\
+        \end{align}
+    }
+
+    \item{  % wat
+        \begin{align}
+            \int_0^\infty{\frac{1}{1+x^2} dx} &= \int_0^\infty{\frac{1}{1+ix} +
+                \frac{1}{1-ix} dx} = \Big[ \frac{1}{i}\ln|1+ix| -
+                \frac{1}{i}\ln|1-ix|\Big]_0^\infty\\
+            &= \Big[ i\Big(\ln|1-ix| - \ln|1+ix|\Big)\Big]_0^\infty \\
+            &= \Big[ i\ln\Big(\frac{|1-ix|}{|1+ix|}\Big)\Big]_0^\infty \\
+        \end{align}
+    }
+\end{enumerate}
+
+
+\end{document}
+
