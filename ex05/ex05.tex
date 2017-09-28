@@ -69,9 +69,9 @@ The fourier transform is given by
     \item { 
         \begin{align}
             \intertext{Inserting (\ref{eq:1-fdef}) into (\ref{ftrans}) we have that}
-            \hat f(x) &= \frac{1}{\sqrt{2\pi}}\Bigg(\int_{-\infty}^0{e^x
+            \hat f(w) &= \frac{1}{\sqrt{2\pi}}\Bigg(\int_{-\infty}^0{e^x
                 e^{-iwx} dx} + \int_0^{\infty}{e^{-x} e^{-iwx} dx}\Bigg) \\
-            \hat f(x) &= \frac{1}{\sqrt{2\pi}}\Bigg(\int_{-\infty}^0{e^{x-iwx}dx} 
+            \hat f(w) &= \frac{1}{\sqrt{2\pi}}\Bigg(\int_{-\infty}^0{e^{x-iwx}dx} 
                 + \int_0^{\infty}{e^{-iwx-x} dx}\Bigg) \\
             &= \frac{1}{\sqrt{2\pi}}\Bigg(\Big[{\frac{1}{1-iw}e^{(1-iw)x}\Big]_
                 {-\infty}^{0}} - \Big[{\frac{1}{1+iw}
@@ -84,14 +84,64 @@ The fourier transform is given by
 
     \item{  % wat
         \begin{align}
-            \int_0^\infty{\frac{1}{1+x^2} dx} &= \int_0^\infty{\frac{1}{1+ix} +
-                \frac{1}{1-ix} dx} = \Big[ \frac{1}{i}\ln|1+ix| -
-                \frac{1}{i}\ln|1-ix|\Big]_0^\infty\\
-            &= \Big[ i\Big(\ln|1-ix| - \ln|1+ix|\Big)\Big]_0^\infty \\
-            &= \Big[ i\ln\Big(\frac{|1-ix|}{|1+ix|}\Big)\Big]_0^\infty \\
+            \int_0^\infty{\frac{1}{1+x^2} dx} &= \Big[\arctan x\Big]_0^\infty =
+                \arctan \infty - \arctan 0 = \frac{\pi}{2}
         \end{align}
     }
 \end{enumerate}
+
+\ex{2}
+
+\begin{align}
+f(x) = 
+    \begin{cases}
+        \sin(x) &\quad -\pi < x < \pi \\
+        0 &\quad \text{otherwise} \\
+    \end{cases}
+\end{align}
+
+\begin{enumerate}[label=\alph*)]
+    \item {
+        \begin{align}
+            \hat f(w) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty{ 
+                \sin(x) e^{-iwx} dx} \\
+            &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{\sin(x) e^{-iwx} dx} \\
+            \intertext{We use the Euler identity \(\sin(x) = \frac{1}{2i}(e^{ix}
+                - e^{-ix})\)}
+            \hat f(w) &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{ \frac{1}{2i}(e^{ix}
+                - e^{-ix}) e^{-iwx} dx} \\
+            &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{ \frac{1}{2i}\big( e^{ix}e^{-iwx}
+                - e^{-ix} e^{-iwx}\big) dx} \\
+            &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{ \frac{1}{2i} e^{(i-iw)x}
+                - \frac{1}{2i} e^{-(i+iw)x} dx} \\
+            &= \frac{1}{\sqrt{2\pi}} \Big[\frac{1}{2i(i-iw)} e^{(i-iw)x} 
+                + \frac{1}{2i(i+iw)} e^{-(i+iw)x} \Big]_{-\pi}^\pi \\
+            &= \frac{1}{\sqrt{2\pi}} \Big[\frac{-1}{2(1-w)} e^{(i-iw)x} 
+                - \frac{1}{2(1+w)} e^{-(i+iw)x} \Big]_{-\pi}^\pi \\
+            &= \frac{1}{\sqrt{2\pi}} \Big(\frac{-1}{2(1-w)} e^{(i-iw)\pi} 
+                - \frac{1}{2(1+w)} e^{-(i+iw)\pi} \Big)
+                - \frac{1}{\sqrt{2\pi}} \Big(\frac{-1}{2(1-w)} e^{-(i-iw)\pi} 
+                - \frac{1}{2(1+w)} e^{(i+iw)\pi} \Big) \\
+            &= \frac{1}{\sqrt{2\pi}} \Bigg( 
+                - \frac{1}{2(1-w)} e^{(i-iw)\pi} 
+                - \frac{1}{2(1+w)} e^{-(i+iw)\pi} 
+                + \frac{1}{2(1-w)} e^{-(i-iw)\pi} 
+                + \frac{1}{2(1+w)} e^{(i+iw)\pi} \Bigg) \\
+            &= \frac{1}{2\sqrt{2\pi}} \Bigg( 
+                - \frac{1}{(1-w)} e^{i\pi}e^{-iw\pi} 
+                - \frac{1}{(1+w)} e^{-i\pi}e^{-iw\pi} 
+                + \frac{1}{(1-w)} e^{-i\pi}e^{iw\pi} 
+                + \frac{1}{(1+w)} e^{i\pi}e^{iw\pi} \Bigg) \\
+            &= \frac{1}{2\sqrt{2\pi}} \Bigg( 
+                - \frac{1}{(1-w)} e^{i\pi}e^{-iw\pi} 
+                - \frac{1}{(1+w)} e^{-i\pi}e^{-iw\pi} 
+                + \frac{1}{(1-w)} e^{-i\pi}e^{iw\pi} 
+                + \frac{1}{(1+w)} e^{i\pi}e^{iw\pi} \Bigg) \\
+        \end{align}
+    }
+\end{enumerate}
+
+\ex{3}
 
 
 \end{document}
