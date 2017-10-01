@@ -54,7 +54,7 @@
 
 
 The fourier transform is given by
-\[\hat f(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}{f(x)e^{-iwx} dx}
+\[\hat f(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}{f(x)e^{-i\omega x} dx}
     \label{ftrans}\]
 
 
@@ -69,16 +69,16 @@ The fourier transform is given by
     \item { 
         \begin{align}
             \intertext{Inserting (\ref{eq:1-fdef}) into (\ref{ftrans}) we have that}
-            \hat f(w) &= \frac{1}{\sqrt{2\pi}}\Bigg(\int_{-\infty}^0{e^x
-                e^{-iwx} dx} + \int_0^{\infty}{e^{-x} e^{-iwx} dx}\Bigg) \\
-            \hat f(w) &= \frac{1}{\sqrt{2\pi}}\Bigg(\int_{-\infty}^0{e^{x-iwx}dx} 
-                + \int_0^{\infty}{e^{-iwx-x} dx}\Bigg) \\
-            &= \frac{1}{\sqrt{2\pi}}\Bigg(\Big[{\frac{1}{1-iw}e^{(1-iw)x}\Big]_
-                {-\infty}^{0}} - \Big[{\frac{1}{1+iw}
-                e^{-(1+iw)x}\Big]_{0}^{\infty}}\Bigg) \\
-            &= \frac{1}{\sqrt{2\pi}}\Bigg(\frac{1}{1-iw} + \frac{1}{1+iw}\Bigg) \\
-            &= \frac{1}{\sqrt{2\pi}}\Bigg(\frac{1+iw}{1+w^2} +
-                \frac{1-iw}{1+w^2}\Bigg) = \frac{1}{\sqrt{2\pi}(1 + w^2)}\\
+            \hat f(\omega ) &= \frac{1}{\sqrt{2\pi}}\Bigg(\int_{-\infty}^0{e^x
+                e^{-i\omega x} dx} + \int_0^{\infty}{e^{-x} e^{-i\omega x} dx}\Bigg) \\
+            \hat f(\omega ) &= \frac{1}{\sqrt{2\pi}}\Bigg(\int_{-\infty}^0{e^{x-i\omega x}dx} 
+                + \int_0^{\infty}{e^{-i\omega x-x} dx}\Bigg) \\
+            &= \frac{1}{\sqrt{2\pi}}\Bigg(\Big[{\frac{1}{1-i\omega }e^{(1-i\omega )x}\Big]_
+                {-\infty}^{0}} - \Big[{\frac{1}{1+i\omega }
+                e^{-(1+i\omega )x}\Big]_{0}^{\infty}}\Bigg) \\
+            &= \frac{1}{\sqrt{2\pi}}\Bigg(\frac{1}{1-i\omega } + \frac{1}{1+i\omega }\Bigg) \\
+            &= \frac{1}{\sqrt{2\pi}}\Bigg(\frac{1+i\omega }{1+\omega ^2} +
+                \frac{1-i\omega }{1+\omega ^2}\Bigg) = \frac{1}{\sqrt{2\pi}(1 + \omega ^2)}\\
         \end{align}
     }
 
@@ -103,45 +103,74 @@ f(x) =
 \begin{enumerate}[label=\alph*)]
     \item {
         \begin{align}
-            \hat f(w) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty{ 
-                \sin(x) e^{-iwx} dx} \\
-            &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{\sin(x) e^{-iwx} dx} \\
+            \hat f(\omega ) &= \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty{ 
+                \sin(x) e^{-i\omega x} dx} \\
+            &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{\sin(x) e^{-i\omega x} dx} \\
             \intertext{We use the Euler identity \(\sin(x) = \frac{1}{2i}(e^{ix}
                 - e^{-ix})\)}
-            \hat f(w) &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{ \frac{1}{2i}(e^{ix}
-                - e^{-ix}) e^{-iwx} dx} \\
-            &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{ \frac{1}{2i}\big( e^{ix}e^{-iwx}
-                - e^{-ix} e^{-iwx}\big) dx} \\
-            &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{ \frac{1}{2i} e^{(i-iw)x}
-                - \frac{1}{2i} e^{-(i+iw)x} dx} \\
-            &= \frac{1}{\sqrt{2\pi}} \Big[\frac{1}{2i(i-iw)} e^{(i-iw)x} 
-                + \frac{1}{2i(i+iw)} e^{-(i+iw)x} \Big]_{-\pi}^\pi \\
-            &= \frac{1}{\sqrt{2\pi}} \Big[\frac{-1}{2(1-w)} e^{(i-iw)x} 
-                - \frac{1}{2(1+w)} e^{-(i+iw)x} \Big]_{-\pi}^\pi \\
-            &= \frac{1}{\sqrt{2\pi}} \Big(\frac{-1}{2(1-w)} e^{(i-iw)\pi} 
-                - \frac{1}{2(1+w)} e^{-(i+iw)\pi} \Big)
-                - \frac{1}{\sqrt{2\pi}} \Big(\frac{-1}{2(1-w)} e^{-(i-iw)\pi} 
-                - \frac{1}{2(1+w)} e^{(i+iw)\pi} \Big) \\
+            \hat f(\omega ) &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{ \frac{1}{2i}(e^{ix}
+                - e^{-ix}) e^{-i\omega x} dx} \\
+            &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{ \frac{1}{2i}\big( e^{ix}e^{-i\omega x}
+                - e^{-ix} e^{-i\omega x}\big) dx} \\
+            &= \frac{1}{\sqrt{2\pi}} \int_{-\pi}^\pi{ \frac{1}{2i} e^{(i-i\omega )x}
+                - \frac{1}{2i} e^{-(i+i\omega )x} dx} \\
+            &= \frac{1}{\sqrt{2\pi}} \Big[\frac{1}{2i(i-i\omega )} e^{(i-i\omega )x} 
+                + \frac{1}{2i(i+i\omega )} e^{-(i+i\omega )x} \Big]_{-\pi}^\pi \\
+            &= \frac{1}{\sqrt{2\pi}} \Big[\frac{-1}{2(1-\omega )} e^{(i-i\omega )x} 
+                - \frac{1}{2(1+\omega )} e^{-(i+i\omega )x} \Big]_{-\pi}^\pi \\
+            &= \frac{1}{\sqrt{2\pi}} \Big(\frac{-1}{2(1-\omega )} e^{(i-i\omega )\pi} 
+                - \frac{1}{2(1+\omega )} e^{-(i+i\omega )\pi} \Big)
+                - \frac{1}{\sqrt{2\pi}} \Big(\frac{-1}{2(1-\omega )} e^{-(i-i\omega )\pi} 
+                - \frac{1}{2(1+\omega )} e^{(i+i\omega )\pi} \Big) \\
             &= \frac{1}{\sqrt{2\pi}} \Bigg( 
-                - \frac{1}{2(1-w)} e^{(i-iw)\pi} 
-                - \frac{1}{2(1+w)} e^{-(i+iw)\pi} 
-                + \frac{1}{2(1-w)} e^{-(i-iw)\pi} 
-                + \frac{1}{2(1+w)} e^{(i+iw)\pi} \Bigg) \\
+                - \frac{1}{2(1-\omega )} e^{(i-i\omega )\pi} 
+                - \frac{1}{2(1+\omega )} e^{-(i+i\omega )\pi} 
+                + \frac{1}{2(1-\omega )} e^{-(i-i\omega )\pi} 
+                + \frac{1}{2(1+\omega )} e^{(i+i\omega )\pi} \Bigg) \\
             &= \frac{1}{2\sqrt{2\pi}} \Bigg( 
-                - \frac{1}{(1-w)} e^{i\pi}e^{-iw\pi} 
-                - \frac{1}{(1+w)} e^{-i\pi}e^{-iw\pi} 
-                + \frac{1}{(1-w)} e^{-i\pi}e^{iw\pi} 
-                + \frac{1}{(1+w)} e^{i\pi}e^{iw\pi} \Bigg) \\
+                - \frac{1}{(1-\omega )} e^{i\pi}e^{-i\omega \pi} 
+                - \frac{1}{(1+\omega )} e^{-i\pi}e^{-i\omega \pi} 
+                + \frac{1}{(1-\omega )} e^{-i\pi}e^{i\omega \pi} 
+                + \frac{1}{(1+\omega )} e^{i\pi}e^{i\omega \pi} \Bigg) \\
             &= \frac{1}{2\sqrt{2\pi}} \Bigg( 
-                - \frac{1}{(1-w)} e^{i\pi}e^{-iw\pi} 
-                - \frac{1}{(1+w)} e^{-i\pi}e^{-iw\pi} 
-                + \frac{1}{(1-w)} e^{-i\pi}e^{iw\pi} 
-                + \frac{1}{(1+w)} e^{i\pi}e^{iw\pi} \Bigg) \\
+                - \frac{1}{(1-\omega )} e^{i\pi}e^{-i\omega \pi} 
+                - \frac{1}{(1+\omega )} e^{-i\pi}e^{-i\omega \pi} 
+                + \frac{1}{(1-\omega )} e^{-i\pi}e^{i\omega \pi} 
+                + \frac{1}{(1+\omega )} e^{i\pi}e^{i\omega \pi} \Bigg) \\
         \end{align}
     }
 \end{enumerate}
 
 \ex{3}
+
+\begin{align}
+    \intertext{We know  that \( \widehat{f'}(f'(x)) = i\omega \hat f(\omega )\) and therefore 
+        \(\widehat{f''}(f''(x)) = \omega ^2 \hat f(\omega )\)}
+    \intertext{we also know that for \(f(x) = \frac{1}{4}e^{-x^2}\), \(f''(x) = x^2e^{-x^2}\)}
+    \hat f(\omega ) &= \frac{1}{4\sqrt{2\pi}}\int_{-\infty}^{\infty}{e^{-x^2} e^{-i\omega x} dx} \\
+    &= \frac{1}{4\sqrt{2\pi}}\int_{-\infty}^{\infty}{e^{-x^2-i\omega x} dx} \\
+    &= \frac{1}{4\sqrt{2\pi}}\Big(\int_{-\infty}^{0}{e^{-x^2-i\omega x} dx}
+        + \int_{0}^{\infty}{e^{-x^2-i\omega x} dx}\Big) \\
+    &= \frac{1}{4\sqrt{2\pi}}\Big(\Big[{\frac{-1}{2x+1}e^{-x^2-i\omega x}\Big]_{-\infty}^{0}} 
+        + \Big[{\frac{-1}{2x+1}e^{-x^2-i\omega x}\Big]_{0}^{\infty}}\Big) \\
+    &= \frac{1}{4\sqrt{2\pi}}\Bigg(\Big( (-1) - 0\Big) + \Big(0 - 1 \Big)\Bigg) \\
+\end{align}
+
+
+\ex{4}
+
+\begin{align}
+    f(x) &= e^{-x^2} \\
+    g(x) &= xe^{-x^2} \\
+    f'(x) &= -2g(x) \\
+    \hat f(w) &= \frac{1}{\sqrt{2}} e^{-\frac{\omega^2}{4}} \\
+    \hat g(x) &= -\frac{1}{2} \widehat{f'}(\omega) = -\frac{1}{2}i\omega \hat f(\omega) \\
+    \hat f(\omega) \hat g(\omega) &= -\frac{1}{2}i\omega \hat f(\omega)^2 \\
+    &= -i\omega\frac{1}{4}e^{-\frac{\omega^2}{2}} \\
+    (f*g)(x) &= \mathcal{F}^{-1} ( \hat f(\omega) \hat g(\omega) ) \\
+    &= -\frac{i}{4} \int_{-\infty}^{\infty}{\omega e^{-\frac{\omega^2}{2}}
+        e^{i\omega x} d\omega}
+\end{align}
 
 
 \end{document}
