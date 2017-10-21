@@ -56,31 +56,85 @@
 \begin{enumerate}[label=\alph*)]
     \item
         \begin{align}
-          y'' + 4y &= e^t \\
-          \intertext{We laplace transform both sides of the equation and get}
-          s^2\hat y - sy(0) - y'(0) + 4 \hat y &= \frac{1}{s-1}, \quad y(0) = y'(0) = 0\\
-          \hat y &= \frac{1}{(s-1)(s^2 + 4)}\\
+            y'' + 4y &= e^t \\
+            \intertext{We laplace transform both sides of the equation and get}
+            s^2\hat y &- sy(0) - y'(0) + 4 \hat y = \frac{1}{s-1}, \quad y(0) = y'(0) = 0\\
+            \hat y &= \frac{1}{(s-1)(s^2 + 4)}\\
+            \hat y &= \frac{0.2}{s-1} + \frac{-0.1 + 0.05i}{s-2i} + \frac{-0.1
+                - 0.05i}{s+2i} \\
+            \intertext{taking the inverse laplace transform yields}
+            y &= 0.2e^t + ( -0.1 + 0.05i)e^{2it} + ( -0.1 - 0.05i)e^{-2it} \\
+            y &= 0.2e^t -0.2\frac{e^{2it}+e^{-2it}}{2} - 0.1\frac{e^{2it} -
+                e^{-2it}}{2i} \\
+            y &= 0.2e^t - 0.2\cos(2t) - 0.1\sin(2t) \\
+            y &= \frac{1}{10}\big(2e^t - 2\cos(2t) - 1\sin(2t)\big) \\
         \end{align}
 
     \item
         \begin{align}
+            y(t) &- \int_0^t{y(\tau)(t-\tau) d\tau} = 2 - \frac{1}{2}t^2 \\
         \end{align}
+        ??? - Missing second function?
 \end{enumerate}
 
 \ex{2}
 
 \begin{align}
+    ty'' &- ty' +y = 1, \quad y(0) = 1, \quad y'(0) = 2 \\
+    \intertext{Taking the laplace transform of both sides gives us}
+    -(s^2\hat y &- sy(0) - y'(0)) -(s\hat y - y(0)) + \hat y = \frac{1}{s} \\
+    -s^2\hat y &+ s + 2 - s\hat y + 1 + \hat y = \frac{1}{s} \\
+    \hat y(-s^2 & - s + 1) = \frac{1}{s} - 3 - s \\
+    \hat y &= -\frac{1}{s(s^2 + s - 1)} + \frac{3}{s^2 + s - 1} + \frac{s}{s^2 +s -1} \\
+    \intertext{\(s^2 + s -1\) can be written as \((s -r_1)(s - r_2)\) where 
+        \(r_1 = \frac{-1 + \sqrt{5}}{2}, \quad r_2 = \frac{-1 - \sqrt{5}}{2}\)
+        (and \((r_1 -r_2) = \sqrt{5}\))}
+    \hat y &= -\frac{1}{s(s-r_1)(s-r_2)} + \frac{3}{(s-r_1)(s-r_2)} +
+        \frac{s}{(s-r_1)(s-r_2)} \\
+    \intertext{We know that}
+    \frac{1}{(s-r_1)(s-r_2)} &= \frac{1}{(r_1-r_2)(s-r_1)} + \frac{1}{(r_2-r_1)(s-r_2)}\\
+    &= \frac{1}{\sqrt{5}(s-r_1)} -
+        \frac{1}{\sqrt{5}(s-r_2)}\\
+    \hat y &= \frac{1}{\sqrt{5}} \Bigg(\frac{1}{s(s-r_1)} - \frac{1}{s(s-r_2)}
+    \intertext{Taking the inverse Laplace transform yields}
+    y &= \frac{1}{\sqrt{5}} \Bigg(\frac{1}{r_1}e^{r_1t} - \frac{1}{r_2}e^{r_2t}
+        + 3e^{r_1t} - 3e^{r_2t} + r_1e^{r_1t} - r_2e^{r_2t}\Bigg) \\
+    &= \frac{1}{\sqrt{5}} e^{r_1t}\bigg( \frac{1}{r_1} + 3 + r_1 \bigg) 
+        - e^{r_2t} \bigg( \frac{1}{r_2} + 3 + r_2 \bigg) \\
+    &= \frac{1}{\sqrt{5}} e^{\frac{-1 + \sqrt{5}}{2}t}\bigg( \frac{1}{\frac{-1
+        + \sqrt{5}}{2}} + 3 + \frac{-1 + \sqrt{5}}{2} \bigg) - e^{\frac{-1 -
+        \sqrt{5}}{2}t} \bigg( \frac{1}{\frac{-1 - \sqrt{5}}{2}} + 3 + \frac{-1
+        - \sqrt{5}}{2} \bigg) \\
+    &= \frac{1}{\sqrt{5}} e^{\frac{-1 + \sqrt{5}}{2}t}\bigg( \frac{1}{\frac{-1
+        + \sqrt{5}}{2}} + 3 + \frac{-1 + \sqrt{5}}{2} \bigg) - e^{\frac{-1 -
+        \sqrt{5}}{2}t} \bigg( \frac{1}{\frac{-1 - \sqrt{5}}{2}} + 3 + \frac{-1
+        - \sqrt{5}}{2} \bigg) \\
+    &= 2.3416e^{0.6180t} - 0.3416e^{-1.6180t} \\
 \end{align}
 
 \ex{3}
 
 \begin{enumerate}[label=\alph*)]
+    \item When \(s\) is a fixed point of \(g\) then \(g(s) = s\) which means that
+                    \(g^{-1}(s) = s\) by definition of the inverse
     \item 
         \begin{align}
+            \intertext{Since g maps from \(x\) to \(y\) we can set}
+            y &= g(x)  \label{eq:3-ydef}\\
+            \intertext{and its inverse \(g^{-1}\) maps from \(y\) to \(x\)}
+            g^{-1}(y) &= x \\
+            \intertext{Differentiating both sides with respects to y gives us}
+            \frac{dg^{-1}}{dy} &= \frac{dx}{dy} \label{eq:3-1}\\
+            \intertext{Insert (\ref{eq:3-ydef}) into (\ref{eq:3-1}) yields}
+            \frac{dg^{-1}}{dy} &= \frac{dx}{dg(x)} = \frac{1}{g'(x)} \\
         \end{align}
 
     \item
         \begin{align}
+            \arccos(x) &= x \\
+            \intertext{We know that the iteration process \(x_{n+1} = g(x_n)\)
+                converges towards a solution \(s = g(s)\) if \(|g'(x)| < 1\)}
+            \intertext{Since }
         \end{align}
 \end{enumerate}
 
