@@ -201,9 +201,9 @@ $ python 3c.py
             \intertext{For \(n\) iterations we have}
             |x_n - s| &\leq K^n|x_0 - s| = 0.74^n|0.5-0.74| = 0.24 \cdot 0.74^n\\
             \intertext{To find the necessary steps for the error \(|x_n - s| < 10^{-15}\) we solve the inequality}
-            0.24 \cdot 0.74^n < 10^{-15} \\
-            \log0.24 + n\log0.74 < -15 \\
-            n > \frac{-15 - \log0.24}{\log0.74} \approx 109.97\\
+            0.24 \cdot 0.74^n &< 10^{-15} \\
+            \log0.24 + n\log0.74 &< -15 \\
+            n > \frac{-15 - \log0.24}{\log0.74} &\approx 109.97\\
             \intertext{This means that 110 iterations is sufficient for an
                 error of less than \(10^{-15}\)}
         \end{align}
@@ -219,7 +219,7 @@ $ python 3c.py
     \intertext{and its derivative}
     f'(x) &= 3x^2 \\
     \intertext{We have Newton's method defined as}
-    x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} = x_n - \frac{x^3 - 7}{3x^2}\\
+    x_{n+1} &= x_n - \frac{f(x_n)}{f'(x_n)} = x_n - \frac{x^3 - 7}{3x^2}\\
 \end{align}
 
 We can implement this in python in the following way
