@@ -28,8 +28,8 @@
 % uncomment this after you have completed the required installation
 % see https://github.com/gpoore/minted for info
 
-%\usepackage{minted} 
-%\definecolor{codeBgColor}{RGB}{240,240,240}
+\usepackage{minted} 
+\definecolor{codeBgColor}{RGB}{240,240,240}
 
 
 
@@ -50,6 +50,7 @@
 \fancyhead[L]{TMA4135 Matematikk 4D}
 \fancyhead[C]{\textbf{Exercise 8}}
 \fancyhead[R]{Otto Lote (748704)}
+\fancyfoot{}
 
 \ex{1}
 
@@ -74,9 +75,11 @@
         \begin{align}
             y(t) &- \int_0^t{y(\tau)(t-\tau) d\tau} = 2 - \frac{1}{2}t^2 \\
         \end{align}
-        ??? - Missing second function?
+        ??? - Missing second function for convolution?
 \end{enumerate}
 
+
+\newpage
 \ex{2}
 
 \begin{align}
@@ -129,21 +132,136 @@
             \frac{dg^{-1}}{dy} &= \frac{dx}{dg(x)} = \frac{1}{g'(x)} \\
         \end{align}
 
-    \item
+    \item {
         \begin{align}
             \arccos(x) &= x \\
             \intertext{We know that the iteration process \(x_{n+1} = g(x_n)\)
                 converges towards a solution \(s = g(s)\) if \(|g'(x)| < 1\)}
-            \intertext{Since }
+            \intertext{From 3a) we know that a fixed point for a function \(g\)
+                is also a fixed point in its inverse \(g^{-1}\)}
+            \intertext{Since \((g^{-1})'(x) = \frac{d}{dx} \cos(x) = -\sin(x)\)
+                has an absolute value less than one on the interval
+                \((\frac{-\pi}{2},\frac{\pi}{2})\) which means the iteration
+                process}
+            x_{n+1} &= \cos(x_n), \quad x \in (\frac{-\pi}{2},\frac{\pi}{2}) \\
+            \intertext{will converge towards a fixed point solution \(s\)}
+        \end{align}
+
+        The iteration can be implemented very simply in python
+
+        \begin{minted}
+            [
+                linenos,                % line numbers
+                bgcolor=codeBgColor     % background color, remove for none
+            ]
+            {python} 
+from math import cos
+
+s = 0
+
+# 100000 iterations is overkill and way more than sufficient
+for i in range(100000):
+    s = cos(s)
+
+# print with two significant digits
+print('%.2f' % s)
+
+        \end{minted}
+
+        Output:
+
+        \begin{minted}
+            [
+                bgcolor=codeBgColor     % background color, remove for none
+            ]
+            {bash} 
+$ python 3c.py                                               
+0.74
+        \end{minted}
+    }
+
+    \item 
+        \begin{align}
+            \intertext{The distance from the solution during an iteration is given by}
+            |x_n - s| &= |g(x_{n-1}) - g(s)| = |g'(x)||x_{n-1} - s| \leq
+                K|x_{n-1} - s|\\
+            \intertext{Or in our case}
+            |x_n - s| &= |g^{-1}(x_{n-1}) - g^{-1}(s)| = |(g^{-1})'(x)||x_{n-1}
+                - s| \leq K|x_{n-1} -s|\\
+            \intertext{Where \(K\) is the maximum value of \(|(g^{-1})'(x)|\)
+                on the interval \([x_0,s]\)}
+            |(g^{-1})'(x)| &= \sin(x), \quad x \in [x_0,s] \\
+            \intertext{For \(x_0 = 0.5\) and \(s < 0.74\) 
+                \begingroup
+                    \fontsize{6pt}{8pt}\selectfont
+                    (s = 0.7390851332151607)
+                \endgroup
+                \(|(g^{-1})'(x)|\) is increasing as \(x\)
+                increases, so we can set \(K = 0.74\)}
+            \intertext{For \(n\) iterations we have}
+            |x_n - s| &\leq K^n|x_0 - s| = 0.74^n|0.5-0.74| = 0.24 \cdot 0.74^n\\
+            \intertext{To find the necessary steps for the error \(|x_n - s| < 10^{-15}\) we solve the inequality}
+            0.24 \cdot 0.74^n < 10^{-15} \\
+            \log0.24 + n\log0.74 < -15 \\
+            n > \frac{-15 - \log0.24}{\log0.74} \approx 109.97\\
+            \intertext{This means that 110 iterations is sufficient for an
+                error of less than \(10^{-15}\)}
         \end{align}
 \end{enumerate}
 
-
+\newpage
 \ex{4}
 
 \begin{align}
+    x &= \sqrt[3]{7} \\
+    \intertext{we have the function}
+    f(x) &= x^3 - 7 = 0 \\
+    \intertext{and its derivative}
+    f'(x) &= 3x^2 \\
+    \intertext{We have Newton's method defined as}
+    x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} = x_n - \frac{x^3 - 7}{3x^2}\\
 \end{align}
 
+We can implement this in python in the following way
+
+\begin{minted}
+    [
+        linenos,                % line numbers
+        bgcolor=codeBgColor     % background color, remove for none
+    ]
+    {python} 
+def f(x):
+    return x**3 - 7
+
+def f_d(x):
+    return 3*x**2
+
+def newton(x_n):
+    return x_n - f(x_n)/f_d(x_n)
+
+# start iterating from s = 1
+s = 1
+
+s_prev = 0
+
+# Run until s = s_prev
+while s != s_prev: 
+    s_prev = s
+    s = newton(s)
+
+print('%.3f' % s)
+\end{minted}
+
+Output:
+
+\begin{minted}
+    [
+        bgcolor=codeBgColor     % background color, remove for none
+    ]
+    {bash} 
+$ python 4.py                                               
+1.913
+\end{minted}
 
 %% uncomment this if you need references. Edit the .bbl file with your references
 %% and use "\cite{bibitem-label}" to cite
