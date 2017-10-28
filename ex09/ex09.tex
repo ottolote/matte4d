@@ -77,7 +77,33 @@
 
     \item
         \begin{align}
+            \intertext{Since Newton's method is of second order its error is given by}
+            \epsilon_{n+1} &\approx -\frac{f''(s)}{2f'(s)}\epsilon_n^2 \label{eq:1b-eps}\\
+            \intertext{This means we need to complete one iteration of Newton's
+            method to estimate the number of iterations required}
+            x_{1} &= x_0 - \frac{f(x_0)}{f'(x_0)} = -1 - \frac{1}{6} = -\frac{7}{6} \\
+            \intertext{The fraction in the error estimate is}
+            \frac{f''(s)}{2f'(s)} &\approx \frac{f''(x_1)}{2f'(x_1)} 
+                = \frac{6x_1 - 2}{6x_1^2 - 4x_1 + 2} = \frac{-7-2}{7^2 + 4.67 + 2} 
+                = -0.16  \\
+            \intertext{From (\ref{eq:1b-eps}) we have}
+            |\epsilon_{n+1}| &\approx 0.16\epsilon_n^2 \approx 0.16(0.16\epsilon^2_{n-1})^2
+                = 0.16^3\epsilon^4_{n-1} \approx 0.16^M\epsilon_0^{M+1} \leq 5
+                \cdot 10^{-6}
+            \intertext{Where \(M = 2^n + 2^{n-1} + ... + 2 + 1 = 2^{n+1} - 1\)}
+            \intertext{To find \(\epsilon_0\) we have that}
+            \epsilon_1 - \epsilon_0 &= (\epsilon_1 - s) - (\epsilon_0 - s) =
+                -x_1 + x_0 \approx 0.17 \\
+            \epsilon_1 &= \epsilon_0 + 0.17 \approx 0.16\epsilon_0^2 +
+                \epsilon_0 + 0.17 \approx 0 \\
+            \intertext{This gives us \(\epsilon_0 \approx -0.175\) which gives
+                us the inequality}
+            0.16^M0.175^{M+1} &\leq 5 \cdot 10^{-6} \\
+            \intertext{This holds for \(n=1\) which means Newton's method has
+                (more than) 5 decimals of accuracy after 1 iteration}
         \end{align}
+    \item Since 1 iteration was enough we have already approximated the
+        solution to 5 decimals of precision with \(x_1 = -\frac{7}{6}\)
 \end{enumerate}
 
 
