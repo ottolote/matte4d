@@ -1,0 +1,208 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+
+% mathermatics
+\usepackage{amssymb} % useful math symbols
+\usepackage{mathrsfs,amsmath} % more useful math (mathrsfs for Fourier F)
+
+% graphics
+\usepackage{graphicx}
+\usepackage{float}    % for more accurate graphics placement
+\usepackage{fancyhdr} % for top header
+
+% references
+\usepackage{hyperref} % needed by cleveref, also provides clickable links
+\usepackage{cleveref} % needed by autonum
+\usepackage{autonum} % only add numbers to referenced equations
+
+% formatting
+\usepackage{enumitem} % provides easy change of labels in enumerate environment
+\usepackage[top=3cm, bottom=4cm, width=17cm]{geometry} % for smaller page margins
+\usepackage{multirow}
+
+% colors
+\usepackage{xcolor}
+
+% coding
+% 
+% uncomment this after you have completed the required installation
+% see https://github.com/gpoore/minted for info
+
+\usepackage{minted} 
+\definecolor{codeBgColor}{RGB}{240,240,240}
+
+
+
+
+% very simple alias, \ex{} becomes the same as \subsubsection*{}
+% TIP: remove the * in the line below if you want it numbered
+\newcommand{\ex}[1]{\subsubsection*{#1}}
+
+
+
+
+%Begining of the document
+\begin{document}
+
+\pagestyle{fancy} % use pagestyle with simple header (from fancyhdr)
+
+%\pagenumbering{gobble} % uncomment to remove pagenumbering (in case of single page document)
+\fancyhead[L]{TMA4135 Matematikk 4D}
+\fancyhead[C]{\textbf{Exercise 10}}
+\fancyhead[R]{Otto Lote (748704)}
+\fancyfoot{}
+
+\ex{1}
+
+We have the data points 
+
+\begin{tabular}{c | r r r r r}
+    \(x_i\) & 0 & 1 & 2 & 4 & 6 \\
+    \hline
+    \(f(x_i)\) & 4 & -1 & -3 & -6 & -9 \\
+\end{tabular}
+
+\begin{enumerate}[label=\alph*)]
+    \item
+        We start by arranging the divided difference table
+
+        \bgroup
+        \def\arraystretch{1.8}%
+        \begin{tabular}{c r | r r r r}
+            \(x_j\) & \(f_j = f(x_j)\) & \(f[x_j, x_{j+1}]\) & \(f[x_j,
+                x_{j+1}, x_{j+2}]\) & \(f[x_j, ..., x_{j+3}]\) &
+                \(f[x_j, ...,  x_{j+4}]\) \\
+            \hline
+            0 & \color{red}{4} & \multirow{2}{*}{\color{red}{-5}} 
+                & \multirow{3}{*}{\color{red}{1.5}} 
+                & \multirow{4}{*}{\color{red}{-0.333333}} 
+                & \multirow{5}{*}{\color{red}{0.061111}} \\
+            1 & -1 & \multirow{2}{*}{-2} & \multirow{3}{*}{0.166667} 
+                & \multirow{4}{*}{0.033333} \\
+            2 & -3 & \multirow{2}{*}{-1.5} & \multirow{3}{*}{0} \\
+            4 & -6 & \multirow{2}{*}{-1.5} \\
+            6 & -9 \\
+        \end{tabular}
+        \egroup
+
+        \begin{align}
+            \intertext{Using the values marked red in the table above we have}
+            f(x) &\approx p_4(x) = 4 - 5x + 1.5x(x-1) - 0.333333x(x-1)(x-2) +
+                0.061111x(x-1)(x-2)(x-4) \\
+        \end{align}
+
+    \item
+        \begin{align}
+            \intertext{For \(x=5\) we get}
+            f(5) &\approx 4 - 25 + 30 - 20 + 3.66 = -7.333333 \\
+        \end{align}
+
+    %\item .
+\end{enumerate}
+
+\newpage
+\ex{2}
+
+\[f(x) = x^2 \cos x\]
+
+\begin{enumerate}[label=\alph*)]
+    \item 
+        \begin{align}
+            \intertext{We are after a polynomial of degree 3. Since a
+                polynomial interpolation with \(n\) nodes produce a polynomial
+                of degree \(n-1\) at most we will use 4 Chebyshev nodes for
+                approximation, given by}
+            x_k &= \frac{1}{2}(a+b) - \frac{1}{2}(b-a) \cos\Big(
+                \frac{2k-1}{2n} \pi \Big), \quad k=1, ..., n \\ 
+            x_k &= \frac{1}{2} - \frac{3}{2} \cos \Big( \frac{2k-1}{2n} \Big)
+                \pi, \quad k = 1, 2, 3, 4 \\
+        \end{align}
+
+        Four Chebyshev nodes on the interval \([-1, 2]\) are given by
+
+        \begin{tabular}{c | c}
+            \(k\) & \(x_k\) \\
+            \hline
+            1 & -0.885819299 \\
+            2 & -0.074025149 \\
+            3 & 1.074025149 \\
+            4 & 1.885819299 \\
+        \end{tabular}
+
+        \begin{align}
+            \intertext{We have the general Langrance Interpolation Polynomial}
+            f(x) &\approx p_n(x) = \sum_{k=0}^n{L_n(x)f_k} =
+                \sum_{k=0}^n{\frac{l_k(x)}{l_k(x_k)}f_k} \\
+            \intertext{where}
+            l_0(x) &= (x-x_1)(x-x_2)...(x-x_n), \\
+            l_k(x) &= (x-x_0)...(x-x_{k-1})(x-x_{k+1}...(x-x_n), \\
+            l_n(x) &= (x-x_0)(x-x_1)...(x-x_{n-1}) \\
+            \intertext{For our four Chebyshev nodes we get}
+            l_0(x) &= (x+0.074025149)(x-1.074025149)(x-1.885819299), \\
+            l_1(x) &= (x+0.885819299)(x-1.074025149)(x-1.885819299), \\
+            l_2(x) &= (x+0.885819299)(x+0.074025149)(x-1.885819299), \\
+            l_3(x) &= (x+0.885819299)(x+0.074025149)(x-1.074025149), \\
+            p_n(x) &= 
+                \frac{(x+0.074025149)(x-1.074025149)(x-1.885819299)}{l_0(x_0)}  \\
+                &+ \frac{(x+0.885819299)(x-1.074025149)(x-1.885819299)}{l_1(x_1)} \\
+                &+ \frac{(x+0.885819299)(x+0.074025149)(x-1.885819299)}{l_2(x_2)} \\
+                &+ \frac{(x+0.885819299)(x+0.074025149)(x-1.074025149)}{l_3(x_3)}  
+        \end{align}
+
+    \item 
+        \begin{align}
+        \end{align}
+\end{enumerate}
+
+\ex{3}
+
+\[\int_1^3 e^{-x} dx\]
+\begin{enumerate}[label=\alph*)]
+    \item 
+        \begin{align}
+            \intertext{The error \(\epsilon_S\) of Simpson's Rule is given by}
+            \epsilon_S &= - \frac{(b-a)^5}{180(2m)^4} f^{(4)}(\hat t) \\
+            f^{(4)} &= e^{-x} \\
+            \intertext{and has its largest value at \(x = 1, f^{(4)}(1) =
+                \frac{1}{e}\) and its smallest at \(x = 3, f^{(4)}(1) = \frac{1}{e^3}\)}
+            \intertext{We set \(M_4 = \frac{1}{e}\), with \(b-a = 2\) and the
+                required accuracy}
+            |CM_4| &= \frac{2^5}{e \cdot 180(2m)^4} = 0.5 \cdot 10^{-5} \\
+            \intertext{This gives us \(m \approx 5.35\) which means we need \(n
+                = 2m = 12\) nodes}
+        \end{align}
+
+    \item 
+        \begin{align}
+            \intertext{We change the integral to be from -1 to 1 by setting \(x
+                = t + 2\), and \(dx = dt\)}
+            \int_1^3 e^{-x} dx &= \int_{-1}^1 e^{-t-2} dt = \int_{-1}^1 e^{-2}
+                e^{-t} dt \\
+        \end{align}
+
+        For Gauss integration with 4 nodes we have the following table
+
+        \begin{tabular}{c | c | c | c }
+            Nodes \(t_j\) & Coefficients \(A_j\) & \(f(t_j)\) & \(A_jf(t_j)\)\\
+            \hline
+            -0.8611363116 & 0.3478548451 & 0.3201826424 & 0.1113770835 \\
+            -0.3399810436 & 0.6521451549 & 0.1901353758 & 0.1239958647 \\
+            0.3399810436 & 0.6521451549 & 0.09632946427 & 0.0628207937 \\
+            0.8611363116 & 0.3478548451 & 0.05720372207 & 0.0198985919 \\
+            \hline
+            \multicolumn{2}{}{} & \(\sum_1^4{A_jf(t_j)}:\) & 0.3180923337 \\
+        \end{tabular}
+
+        This is an error of 0.00000003908 (below) the actual value of
+            \(\frac{e^2 - 1}{e^3}\)
+\end{enumerate}
+
+
+
+%% uncomment this if you need references. Edit the .bbl file with your references
+%% and use "\cite{bibitem-label}" to cite
+%\bibliography{template}
+
+\end{document}
+
