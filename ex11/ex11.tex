@@ -57,7 +57,30 @@
 
 
 \begin{enumerate}[label=\alph*)]
-    \item 
+    \item We use the following script to find the DFT of the discrete time series
+
+            \begin{minted}
+                [
+                    linenos,                % line numbers
+                    bgcolor=codeBgColor     % background color, remove for none
+                ]
+                {matlab} 
+% Discrete time series x
+x = [0, 2, 3, 7];
+
+% Fast fourier transform of x, then take the real part
+y = fft(x);
+r = real(y);
+
+plot(r);
+            \end{minted}
+    \item This results in the following plot
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.7\textwidth]{task1.eps}
+            \caption{Matlab plot of the real part of the \texttt{fft} of the
+                discrete time series}
+        \end{figure}
 \end{enumerate}
 
 \newpage
@@ -65,7 +88,7 @@
 
 
 \begin{enumerate}[label=\alph*)]
-    \item 
+    \item test
 
     \item 
         \begin{align}
