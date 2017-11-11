@@ -6,6 +6,7 @@
 **.aux
 **.dvi
 **.out
+**eps-converted-to.pdf
 
 # vim swapfiles
 **.swp
