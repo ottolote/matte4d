@@ -148,9 +148,147 @@ We have the system of equations
             A)))} which outputs \texttt{0.2640}. This means the Jacobi
             iteration converges.
 
-    \item 
-        \begin{align}
-        \end{align}
+    \newpage
+    \item We apply four steps of Gauss-Seidel iteration using the following matlab script
+        \begin{minted}
+            [
+                linenos,                % line numbers
+                bgcolor=codeBgColor     % background color, remove for none
+            ]
+            {matlab} 
+% Gauss-Seidel iteration script, based on the Gauss-Seidel iteration 
+% example from mathworks.com
+
+U = [0 0.2 0.4; 0 0 -0.5; 0 0 0];
+L = [0 0 0; 0.25 0 0; 0.25 0.375 0];
+
+b = [3.8 -0.5 4.875]';
+
+I = eye(3);
+A = I + L + U;
+
+% initial vector x
+x = ones(3,1);
+
+n = size(x, 1);
+
+GaussItr = 0;
+
+% list of all values of x
+Gausshistory=[x];
+
+while GaussItr<4
+    x_old=x;   
+    for i=1:n        
+        sigma=0;
+        for j=1:i-1
+                sigma=sigma+A(i,j)*x(j);
+        end
+        for j=i+1:n
+                sigma=sigma+A(i,j)*x_old(j);
+        end
+        x(i)=(1/A(i,i))*(b(i)-sigma);
+    end
+ 
+    % append new x to Gausshistory
+    Gausshistory=[Gausshistory, x];
+    
+    GaussItr=GaussItr+1;
+end
+fprintf('Solution of the system is : \n%f\n%f\n%f\nin %d iterations\n',x,GaussItr);
+        \end{minted}
+
+        This outputs 
+        
+        \texttt{Solution of the system is :  \\
+            2.004181 \\
+            1.007509 \\
+            3.996139 \\
+            in 4 iterations}
+
+        \newpage
+        The \texttt{Gausshistory} variable contains
+
+        \texttt{Gausshistory =} \\
+        \begin{tabular}{r r r r r}
+            1.0000 &  3.2000 & 2.2100 & 2.0142 & 2.0042 \\
+            1.0000 & -0.8000 & 1.1350 & 0.9449 & 1.0075 \\
+            1.0000 &  4.3750 & 3.8969 & 4.0171 & 3.9961 \\
+        \end{tabular}
+
+        Plotting these values we get a nice plot showing the convergence.
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=\textwidth]{task2b.eps}
+            \caption{\texttt{>> plot(Gausshistory')}}
+        \end{figure}
+
+    \newpage
+    \item We apply four steps of Jacobi iteration using the following matlab script
+        \begin{minted}
+            [
+                linenos,                % line numbers
+                bgcolor=codeBgColor     % background color, remove for none
+            ]
+            {matlab} 
+% Jacobi iteration script, based on the Jacobi iteration 
+% example from mathworks.com
+
+U = [0 0.2 0.4; 0 0 -0.5; 0 0 0];
+L = [0 0 0; 0.25 0 0; 0.25 0.375 0];
+
+b = [3.8 -0.5 4.875]';
+
+I = eye(3);
+A = I + L + U;
+
+% initial vector x
+x = ones(3,1);
+
+n = size(x, 1);;
+
+JacobItr = 0;
+
+% list of all values of x
+Jacobhistory=[x];
+
+while JacobItr<4
+    xold=x;
+    for i=1:n
+        sigma=0;
+        for j=1:n
+            if j~=i
+                sigma=sigma+A(i,j)*x(j);
+            end 
+        end
+        x(i)=(1/A(i,i))*(b(i)-sigma);
+    end
+    
+    JacobItr=JacobItr+1;
+    Jacobhistory =[Jacobhistory, x];
+end
+fprintf('Solution of the system is : \n%f\n%f\n%f\nin %d iterations\n',x,JacobItr);
+        \end{minted}
+
+        This outputs 
+        
+        \texttt{Solution of the system is :  \\
+            2.004181 \\
+            1.007509 \\
+            3.996139 \\
+            in 4 iterations}
+
+        The \texttt{Jacobhistory} variable contains the exact same results as
+            the Gauss-seidel iteration
+
+        \texttt{Jacobhistory =} \\
+        \begin{tabular}{r r r r r}
+            1.0000 &  3.2000 & 2.2100 & 2.0142 & 2.0042 \\
+            1.0000 & -0.8000 & 1.1350 & 0.9449 & 1.0075 \\
+            1.0000 &  4.3750 & 3.8969 & 4.0171 & 3.9961 \\
+        \end{tabular}
+
 \end{enumerate}
 
 
