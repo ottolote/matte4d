@@ -24,3 +24,6 @@ ex11/ex11.pdf
 
 # latex plugin temporary files
 */_minted*
+
+# matlab temporary files
+**.m~
